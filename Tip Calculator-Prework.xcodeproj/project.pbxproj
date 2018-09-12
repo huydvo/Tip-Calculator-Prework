@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F38A72C21497B9700F37F31 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F38A72B21497B9700F37F31 /* SettingViewController.swift */; };
 		4F6DD2FC2148E237000F7C48 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6DD2FB2148E237000F7C48 /* AppDelegate.swift */; };
 		4F6DD2FE2148E237000F7C48 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F6DD2FD2148E237000F7C48 /* ViewController.swift */; };
 		4F6DD3012148E237000F7C48 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F6DD2FF2148E237000F7C48 /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4F38A72B21497B9700F37F31 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		4F6DD2F82148E237000F7C48 /* Tip Calculator-Prework.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tip Calculator-Prework.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F6DD2FB2148E237000F7C48 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F6DD2FD2148E237000F7C48 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				4F6DD2FB2148E237000F7C48 /* AppDelegate.swift */,
 				4F6DD2FD2148E237000F7C48 /* ViewController.swift */,
 				4F6DD2FF2148E237000F7C48 /* Main.storyboard */,
+				4F38A72B21497B9700F37F31 /* SettingViewController.swift */,
 				4F6DD3022148E23A000F7C48 /* Assets.xcassets */,
 				4F6DD3042148E23A000F7C48 /* LaunchScreen.storyboard */,
 				4F6DD3072148E23A000F7C48 /* Info.plist */,
@@ -258,6 +261,7 @@
 			files = (
 				4F6DD2FE2148E237000F7C48 /* ViewController.swift in Sources */,
 				4F6DD2FC2148E237000F7C48 /* AppDelegate.swift in Sources */,
+				4F38A72C21497B9700F37F31 /* SettingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
