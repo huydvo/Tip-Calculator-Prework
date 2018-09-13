@@ -41,28 +41,44 @@ class SettingViewController: UIViewController {
     */
     
     @IBAction func stepper1(_ sender: UIStepper) {
+        if(sender.value != 0){
         tip1.text = Int(sender.value).description + " %"
         defaults.set(Double(sender.value/100), forKey: "tip1")
         defaults.synchronize()
+        }
     }
     
     @IBAction func stepper2(_ sender: UIStepper) {
+        if(sender.value != 0){
         tip2.text = Int(sender.value).description + " %"
         defaults.set(Double(sender.value/100), forKey: "tip2")
         defaults.synchronize()
+        }
     }
     
     @IBAction func stepper3(_ sender: UIStepper) {
+        if(sender.value != 0){
           tip3.text = Int(sender.value).description + " %"
         defaults.set(Double(sender.value/100), forKey: "tip3")
         defaults.synchronize()
+        }
     }
 
     @IBAction func pickDefaultTip(_ sender: Any) {
         defaults.set(segmentDefault.selectedSegmentIndex, forKey: "segmentDefault")
         defaults.synchronize()
     }
-    
+     override func viewWillAppear(_ animated: Bool) {
+        if(defaults.double(forKey: "tip1") != 0){
+            tip1.text = String(Int(defaults.double(forKey: "tip1")*100)) + " %"
+        }
+        if(defaults.double(forKey: "tip2") != 0){
+            tip2.text = String(Int(defaults.double(forKey: "tip2")*100)) + " %"
+        }
+        if(defaults.double(forKey: "tip3") != 0){
+            tip3.text = String(Int(defaults.double(forKey: "tip3")*100)) + " %"
+        }
+    }
     
     
 

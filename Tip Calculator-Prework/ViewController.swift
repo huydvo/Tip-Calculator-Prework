@@ -16,7 +16,8 @@ class ViewController: UIViewController {
     @IBOutlet var people: UILabel!
     @IBOutlet var perPersonCost: UILabel!
     let defaults = UserDefaults.standard
-
+    var total:Double = 0.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -35,19 +36,19 @@ class ViewController: UIViewController {
     
     @IBAction func calculateTip(_ sender: Any) {
         var tipPercentages:[Double] = [0.18,0.20,0.25]
-        tipPercentages[0] = defaults.double(forKey: "tip1") ?? 0.180
-        tipPercentages[1] = defaults.double(forKey: "tip2") ?? 0.20
-        tipPercentages[2] = defaults.double(forKey: "tip3") ?? 0.25
-
+        if(defaults.double(forKey: "tip1") != 0.0){
+            tipPercentages[0] = defaults.double(forKey: "tip1")}
+        if(defaults.double(forKey: "tip2") != 0.0){
+            tipPercentages[1] = defaults.double(forKey: "tip2")}
+        if(defaults.double(forKey: "tip3") != 0.0){
+            tipPercentages[2] = defaults.double(forKey: "tip3")}
         let bill = Double(billField.text!) ?? 0
         let tip = bill*tipPercentages[tipControl.selectedSegmentIndex]
-        let total = bill + tip
+        total = bill + tip
         tipLabel.text = String(format: "$%.2f", tip)
         totalLabel.text = String(format: "$%.2f", total)
         
-        
-        //TODO Check with TA why this doesnt run
-        perPersonCost.text = Int(ceil(  Double(totalLabel.text!) ?? 0 / (Double(people.text!) ?? 1))).description
+        perPersonCost.text =  totalLabel.text
     }
     
     @IBAction func stepperPeople(_ sender: UIStepper) {
@@ -59,19 +60,25 @@ class ViewController: UIViewController {
             suffix = " people"
         }
         people.text = Int(sender.value).description + suffix
-        
+        perPersonCost.text =  "$" + String(Int(ceil(total/Double(sender.value))))
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("view will appear")
-        tipControl.setTitle(String(defaults.double(forKey: "tip1")*100), forSegmentAt: 0)
-        tipControl.setTitle(String(defaults.double(forKey: "tip2")*100), forSegmentAt: 1)
-        tipControl.setTitle(String(defaults.double(forKey: "tip3")*100), forSegmentAt: 2)
+        if(defaults.double(forKey: "tip1") != 0){
+        tipControl.setTitle(String(Int(defaults.double(forKey: "tip1")*100)) + " %", forSegmentAt: 0)
+        }
+        if(defaults.double(forKey: "tip2") != 0){
+        tipControl.setTitle(String(Int(defaults.double(forKey: "tip2")*100)) + " %", forSegmentAt: 1)
+        }
+        if(defaults.double(forKey: "tip3") != 0){
+        tipControl.setTitle(String(Int(defaults.double(forKey: "tip3")*100)) + " %", forSegmentAt: 2)
+        }
         tipControl.selectedSegmentIndex = defaults.integer(forKey: "segmentDefault")
         // This is a good place to retrieve the default tip percentage from UserDefaults
         // and use it to update the tip amount
-    }
+        }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
