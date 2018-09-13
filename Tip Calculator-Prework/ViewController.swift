@@ -17,7 +17,8 @@ class ViewController: UIViewController {
     @IBOutlet var perPersonCost: UILabel!
     let defaults = UserDefaults.standard
     var total:Double = 0.0
-    
+    var tip:Double = 0.0
+    var tipPercentages:[Double] = [0.18,0.20,0.25]
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -35,7 +36,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func calculateTip(_ sender: Any) {
-        var tipPercentages:[Double] = [0.18,0.20,0.25]
+        //var tipPercentages:[Double] = [0.18,0.20,0.25]
         if(defaults.double(forKey: "tip1") != 0.0){
             tipPercentages[0] = defaults.double(forKey: "tip1")}
         if(defaults.double(forKey: "tip2") != 0.0){
@@ -43,11 +44,12 @@ class ViewController: UIViewController {
         if(defaults.double(forKey: "tip3") != 0.0){
             tipPercentages[2] = defaults.double(forKey: "tip3")}
         let bill = Double(billField.text!) ?? 0
-        let tip = bill*tipPercentages[tipControl.selectedSegmentIndex]
+        tip = bill*tipPercentages[tipControl.selectedSegmentIndex]
         total = bill + tip
-        tipLabel.text = String(format: "$%.2f", tip)
-        totalLabel.text = String(format: "$%.2f", total)
-        
+        //tipLabel.text = String(format: "$%.2f", tip)
+        //totalLabel.text = String(format: "$%.2f", total)
+        tipLabel.text = formatCurrency(value: tip)
+        totalLabel.text = formatCurrency(value: total)
         perPersonCost.text =  totalLabel.text
     }
     
@@ -60,7 +62,7 @@ class ViewController: UIViewController {
             suffix = " people"
         }
         people.text = Int(sender.value).description + suffix
-        perPersonCost.text =  "$" + String(Int(ceil(total/Double(sender.value))))
+        perPersonCost.text =  formatCurrency(value: (ceil(total/Double(sender.value))))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,8 +78,12 @@ class ViewController: UIViewController {
         tipControl.setTitle(String(Int(defaults.double(forKey: "tip3")*100)) + " %", forSegmentAt: 2)
         }
         tipControl.selectedSegmentIndex = defaults.integer(forKey: "segmentDefault")
-        // This is a good place to retrieve the default tip percentage from UserDefaults
-        // and use it to update the tip amount
+        let bill = Double(billField.text!) ?? 0
+        tip = bill*tipPercentages[tipControl.selectedSegmentIndex]
+        total = bill + tip
+        totalLabel.text = formatCurrency(value: total)
+        tipLabel.text = formatCurrency(value: tip)
+        perPersonCost.text = totalLabel.text
         }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -93,6 +99,15 @@ class ViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidAppear(animated)
         print("view did disappear")
+    }
+    
+    func formatCurrency(value: Double) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.maximumFractionDigits = 2
+        formatter.locale = Locale(identifier: Locale.current.identifier)
+        let result = formatter.string(from: value as NSNumber)
+        return result!
     }
 }
 

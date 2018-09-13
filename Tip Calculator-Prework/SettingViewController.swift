@@ -14,9 +14,9 @@ class SettingViewController: UIViewController {
     @IBOutlet var tip2: UILabel!
     @IBOutlet var tip3: UILabel!
     @IBOutlet var segmentDefault: UISegmentedControl!
-    
-
     let defaults = UserDefaults.standard
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
